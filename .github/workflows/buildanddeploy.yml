@@ -39,3 +39,10 @@ jobs:
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
+
+  call-render-deploy:
+    needs: build-and-push-image
+    runs-on: ubuntu-latest
+    steps:
+      - name: Call render.com
+        run: curl -X GET ${{ secrets.RENDER_DEPLOY }}
