@@ -1,9 +1,11 @@
 import Image from "next/image";
 import GameThumbnail from "./GameThumbnail";
 import { getGames } from "./api/games/games.controller";
+import mongoose from 'mongoose'
 
+await mongoose.connect('mongodb://leaderdb:27017/leadercampaigns')
 let data = await getGames()
-console.log(data)
+console.log('HHHHHHHH', global)
 export default function Home() {
   return (
     <main >
@@ -18,7 +20,7 @@ export default function Home() {
       </div>
       <div id="content" className="h-screen">
         {data &&
-          data.map((item) => <GameThumbnail game={item} />)
+          data.map((item, key) => <GameThumbnail key={key} game={item} />)
 
         }
       </div>
